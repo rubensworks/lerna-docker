@@ -3,7 +3,7 @@
 
 if [ ! -d "$HOME/.comunica-lerna-docker" ]; then
     echo "Installing Comunica Lerna Docker"
-    git clone --depth=1 --recursive https://github.com/comunica/lerna-docker.git "$HOME/.comunica-lerna-docker"
+    git clone --depth=1 --recursive https://github.com/comunica/comunica-lerna-docker.git "$HOME/.comunica-lerna-docker"
     dir="$HOME/.comunica-lerna-docker"
     echo "export PATH=\"$dir/bin:\$PATH\"" >> ~/.bash_profile
     

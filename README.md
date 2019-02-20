@@ -23,7 +23,7 @@ This will automatically clone this repo into `$HOME/.comunica-lerna-docker` (_re
 and adds this tool to your `$PATH`.
 
 ```bash
-$ sh -c "`curl -fsSl https://raw.githubusercontent.com/comunica/lerna-docker/master/install.sh`"
+$ sh -c "`curl -fsSl https://raw.githubusercontent.com/comunica/comunica-lerna-docker/master/install.sh`"
 ```
 
 If you want to uninstall later, just remove `$HOME/.comunica-lerna-docker` and the `$PATH` modification in `~/.bash_profile`.
@@ -33,14 +33,14 @@ If you want to uninstall later, just remove `$HOME/.comunica-lerna-docker` and t
 First, clone this repo somewhere:
 
 ```bash
-$ git clone git@github.com:comunica/lerna-docker.git
+$ git clone git@github.com:comunica/comunica-lerna-docker.git
 ```
 
 Then, add the `/bin` folder to your `$PATH`.
 For example, by adding the following to your `~/.bash_profile`
 
 ```bash
-export PATH="/path/to/lerna-docker/bin:$PATH"
+export PATH="/path/to/comunica-lerna-docker/bin:$PATH"
 ```
 
 ## Usage
