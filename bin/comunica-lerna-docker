@@ -21,7 +21,8 @@ echo "Building images with tag $VERSION"
 
 # Set up a temporary npm registry on http://localhost:4873 in which we publish all current comunica packages
 mkdir -p /tmp/verdaccio/storage
-verdaccio --config .travis/verdaccio-config.yaml &
+tool_dir="$(dirname "${BASH_SOURCE[0]}")/.."
+verdaccio --config $tool_dir/verdaccio-config.yaml &
 sleep 1
 REGISTRY_PID=$!
 npm-cli-adduser --registry http://localhost:4873 --username comunica --password comunica --email comunica@linkeddatafragments.org
