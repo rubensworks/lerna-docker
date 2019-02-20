@@ -6,11 +6,13 @@ if [[ $1 == "push" ]]; then
 fi
 
 # Set a version tag
+LATEST=false
 if [[ $# -eq 2 ]]; then
     VERSION=$2
 else
     if [ ! -z "$TRAVIS_TAG" ]; then
         VERSION=${TRAVIS_TAG:1}
+        LATEST=true
     else
         VERSION="dev"
     fi
@@ -40,12 +42,16 @@ for package in packages/*; do
             echo "Failed to build Docker image for $package"
             exit 1;
         fi
-        docker tag $imagename:$VERSION $imagename:latest
+        if [ "$LATEST" = true ] ; then
+            docker tag $imagename:$VERSION $imagename:latest
+        fi
 
         if [[ $1 == "push" ]]; then
             echo "Pushing Docker image $imagename..."
             docker push $imagename:$VERSION
-            docker push $imagename:latest
+            if [ "$LATEST" = true ] ; then
+                docker push $imagename:latest
+            fi
         fi
     fi
 done
