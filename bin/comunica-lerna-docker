@@ -25,12 +25,6 @@ tool_dir="$(dirname "${BASH_SOURCE[0]}")/.."
 verdaccio --config $tool_dir/verdaccio-config.yaml &
 sleep 1
 REGISTRY_PID=$!
-function finish {
-    # Stop and clean npm registry
-    kill -9 $REGISTRY_PID
-    rm -r /tmp/verdaccio/storage
-}
-trap finish EXIT
 npm-cli-adduser --registry http://localhost:4873 --username comunica --password comunica --email comunica@linkeddatafragments.org
 npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
 if [ "$(uname)" == "Darwin" ]; then
@@ -38,6 +32,18 @@ if [ "$(uname)" == "Darwin" ]; then
 else
     NPM_REGISTRY="http://127.0.0.1:4873/"
 fi
+
+# Restart the temporary npm registry, but now add an uplink to npm
+kill -9 $REGISTRY_PID
+verdaccio --config $tool_dir/verdaccio-config-uplink.yaml &
+sleep 1
+REGISTRY_PID=$!
+function finish {
+    # Stop and clean npm registry
+    kill -9 $REGISTRY_PID
+    rm -r /tmp/verdaccio/storage
+}
+trap finish EXIT
 
 # Build images for all packages with a Dockerfile, and optionally push them
 for package in packages/*; do
