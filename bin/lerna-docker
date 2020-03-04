@@ -1,14 +1,24 @@
 #!/usr/bin/env bash
 
-if [[ $1 == "push" ]]; then
+# Validate input arguments
+if [[ $# -ne 3 && $# -ne 2 ]]; then
+    echo "Incorrect input arguments"
+    echo "Usage: lerna-docker my-docker-organization build|push [version-tag]"
+    exit 1
+fi
+
+# Determine the Docker organization name
+org=$1
+
+if [[ $2 == "push" ]]; then
     # Make sure we are logged in
     echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 fi
 
 # Set a version tag
 LATEST=false
-if [[ $# -eq 2 ]]; then
-    VERSION=$2
+if [[ $# -eq 3 ]]; then
+    VERSION=$3
 else
     if [ ! -z "$TRAVIS_TAG" ]; then
         VERSION=${TRAVIS_TAG:1}
@@ -19,13 +29,13 @@ else
 fi
 echo "Building images with tag $VERSION"
 
-# Set up a temporary npm registry on http://localhost:4873 in which we publish all current comunica packages
+# Set up a temporary npm registry on http://localhost:4873 in which we publish all current lerna packages
 mkdir -p /tmp/verdaccio/storage
 tool_dir="$(dirname "${BASH_SOURCE[0]}")/.."
 verdaccio --config $tool_dir/verdaccio-config.yaml &
 sleep 1
 REGISTRY_PID=$!
-npm-cli-adduser --registry http://localhost:4873 --username comunica --password comunica --email comunica@linkeddatafragments.org
+npm-cli-adduser --registry http://localhost:4873 --username lerna --password lerna --email lerna@example.org
 npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
 if [ "$(uname)" == "Darwin" ]; then
     NPM_REGISTRY="http://host.docker.internal:4873/"
@@ -48,7 +58,7 @@ trap finish EXIT
 # Build images for all packages with a Dockerfile, and optionally push them
 for package in packages/*; do
     if [ -f $package/Dockerfile ]; then
-        imagename="comunica/"$(echo $package | sed "s/packages\///")
+        imagename="$org/"$(echo $package | sed "s/packages\///")
 
         echo "Building Docker image $imagename..."
         if ! docker build --network="host" --build-arg NPM_REGISTRY=$NPM_REGISTRY -t $imagename:$VERSION $package; then

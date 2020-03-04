@@ -1,13 +1,11 @@
-# Comunica Lerna Docker
+# Lerna Docker
 
-A simple tool for easily building and publishing [Docker](https://www.docker.com/) images inside Comunica [Lerna](https://lernajs.io/) monorepos.
+A simple tool for easily building and publishing [Docker](https://www.docker.com/) images inside [Lerna](https://lernajs.io/) monorepos.
 
 Features:
 * Building Docker images for all packages that have a Dockerfile.
 * Pushing Docker images to Docker hub based.
 * Automatic Docker hub authentication for running in CI environments.
-
-**Note: this tool is built for Comunica monorepos and will not work properly for other monorepos. We may generalize this tool to any lerna project in the future.**
 
 ## Requirements
 
@@ -19,28 +17,28 @@ Features:
 
 ### Automatically
 
-This will automatically clone this repo into `$HOME/.comunica-lerna-docker` (_requires [git](https://git-scm.com/)_),
+This will automatically clone this repo into `$HOME/.lerna-docker` (_requires [git](https://git-scm.com/)_),
 and adds this tool to your `$PATH`.
 
 ```bash
-$ sh -c "`curl -fsSl https://raw.githubusercontent.com/comunica/comunica-lerna-docker/master/install.sh`"
+$ sh -c "`curl -fsSl https://raw.githubusercontent.com/rubensworks/lerna-docker/master/install.sh`"
 ```
 
-If you want to uninstall later, just remove `$HOME/.comunica-lerna-docker` and the `$PATH` modification in `~/.bash_profile`.
+If you want to uninstall later, just remove `$HOME/.lerna-docker` and the `$PATH` modification in `~/.bash_profile`.
 
 ### Manually
 
 First, clone this repo somewhere:
 
 ```bash
-$ git clone git@github.com:comunica/comunica-lerna-docker.git
+$ git clone git@github.com:rubensworks/lerna-docker.git
 ```
 
 Then, add the `/bin` folder to your `$PATH`.
 For example, by adding the following to your `~/.bash_profile`
 
 ```bash
-export PATH="/path/to/comunica-lerna-docker/bin:$PATH"
+export PATH="/path/to/lerna-docker/bin:$PATH"
 ```
 
 ## Usage
@@ -53,7 +51,7 @@ If no version is given, then either a version based on `$TRAVIS_TAG` or `"DEV"` 
 Build all Dockerfiles that can be found in `packages/*`:
 
 ```bash
-$ comunica-lerna-docker build [version-tag]
+$ lerna-docker my-docker-organization build [version-tag]
 ```
 
 ### Pushing
@@ -61,7 +59,7 @@ $ comunica-lerna-docker build [version-tag]
 Pushing all images to Docker hub based on the Dockerfiles that can be found in `packages/*`:
 
 ```bash
-$ comunica-lerna-docker push [version-tag]
+$ lerna-docker my-docker-organization push [version-tag]
 ```
 
 If you want to push in a CI environment,

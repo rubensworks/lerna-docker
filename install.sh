@@ -1,13 +1,13 @@
 #!/bin/bash
-# Installs Comunica Lerna Docker
+# Installs Lerna Docker
 
-if [ ! -d "$HOME/.comunica-lerna-docker" ]; then
-    echo "Installing Comunica Lerna Docker"
-    git clone --depth=1 --recursive https://github.com/comunica/comunica-lerna-docker.git "$HOME/.comunica-lerna-docker"
-    dir="$HOME/.comunica-lerna-docker"
+if [ ! -d "$HOME/.lerna-docker" ]; then
+    echo "Installing Lerna Docker"
+    git clone --depth=1 --recursive https://github.com/rubensworks/lerna-docker.git "$HOME/.lerna-docker"
+    dir="$HOME/.lerna-docker"
     echo "export PATH=\"$dir/bin:\$PATH\"" >> ~/.bash_profile
     
     npm install -g verdaccio@3.11.4 npm-cli-adduser
 else
-    echo "Comunica Lerna Docker is already installed at $HOME/.comunica-lerna-docker"
+    echo "Lerna Docker is already installed at $HOME/.lerna-docker"
 fi
