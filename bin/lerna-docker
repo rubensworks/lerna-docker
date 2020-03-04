@@ -69,7 +69,7 @@ for package in packages/*; do
             docker tag $imagename:$VERSION $imagename:latest
         fi
 
-        if [[ $1 == "push" ]]; then
+        if [[ $2 == "push" ]]; then
             echo "Pushing Docker image $imagename..."
             docker push $imagename:$VERSION
             if [ "$LATEST" = true ] ; then
