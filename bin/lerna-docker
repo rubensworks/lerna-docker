@@ -23,6 +23,8 @@ else
     if [ ! -z "$TRAVIS_TAG" ]; then
         VERSION=${TRAVIS_TAG:1}
         LATEST=true
+    elif [ "$GITHUB_REF" == refs/tags/* ]; then
+        VERSION=${GITHUB_REF:10}
     else
         VERSION="dev"
     fi
