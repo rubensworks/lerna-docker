@@ -25,6 +25,7 @@ else
         LATEST=true
    elif [[ "$GITHUB_REF" =~ refs/tags/* ]]; then
         VERSION=${GITHUB_REF:10}
+        LATEST=true
     else
         VERSION="dev"
     fi
