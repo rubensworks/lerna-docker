@@ -19,6 +19,7 @@ fi
 LATEST=false
 if [[ $# -eq 3 ]]; then
     VERSION=$3
+    LATEST=true
 else
     if [ ! -z "$TRAVIS_TAG" ]; then
         VERSION=${TRAVIS_TAG:1}
@@ -59,9 +60,9 @@ function finish {
 trap finish EXIT
 
 # Build images for all packages with a Dockerfile, and optionally push them
-for package in packages/*; do
+for package in packages/* engines/*; do
     if [ -f $package/Dockerfile ]; then
-        imagename="$org/"$(echo $package | sed "s/packages\///")
+        imagename="$org/"$(echo $package | sed "s/[^\/]*\///")
 
         echo "Building Docker image $imagename..."
         if ! docker build --network="host" --build-arg NPM_REGISTRY=$NPM_REGISTRY -t $imagename:$VERSION $package; then
