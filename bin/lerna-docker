@@ -41,11 +41,8 @@ sleep 1
 REGISTRY_PID=$!
 npm-cli-adduser --registry http://localhost:4873 --username lerna --password lerna --email lerna@example.org
 npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
-if [ "$(uname)" == "Darwin" ]; then
-    NPM_REGISTRY="http://host.docker.internal:4873/"
-else
-    NPM_REGISTRY="http://127.0.0.1:4873/"
-fi
+
+NPM_REGISTRY="http://host.docker.internal:4873/"
 
 # Restart the temporary npm registry, but now add an uplink to npm
 kill -9 $REGISTRY_PID
