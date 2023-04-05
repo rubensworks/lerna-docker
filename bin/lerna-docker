@@ -44,9 +44,9 @@ npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/n
 
 # If we run on mac or WSL we use docker internal
 if [[ $(grep -i Microsoft /proc/version) ]] || ["$(uname)" == "Darwin"]; then
-        NPM_REGISTRY="http://host.docker.internal:4873/"
+    NPM_REGISTRY="http://host.docker.internal:4873/"
 else
-        NPM_REGISTRY="http://127.0.0.1:4873/"
+    NPM_REGISTRY="http://127.0.0.1:4873/"
 fi
 
 # Restart the temporary npm registry, but now add an uplink to npm
