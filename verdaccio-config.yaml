@@ -28,3 +28,7 @@ middlewares:
 
 logs:
   - {type: stdout, format: pretty, level: error}
+
+listen:
+  - localhost:4873
+  - 0.0.0.0:4873

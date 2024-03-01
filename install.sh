@@ -7,7 +7,7 @@ if [ ! -d "$HOME/.lerna-docker" ]; then
     dir="$HOME/.lerna-docker"
     echo "export PATH=\"$dir/bin:\$PATH\"" >> ~/.bash_profile
     
-    npm install -g verdaccio@3.11.4 npm-cli-adduser
+    npm install -g verdaccio@5.29.2 npm-cli-adduser npm-cli-login
 else
     echo "Lerna Docker is already installed at $HOME/.lerna-docker"
 fi

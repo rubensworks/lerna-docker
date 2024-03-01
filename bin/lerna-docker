@@ -40,6 +40,7 @@ verdaccio --config $tool_dir/verdaccio-config.yaml &
 sleep 1
 REGISTRY_PID=$!
 npm-cli-adduser --registry http://localhost:4873 --username lerna --password lerna --email lerna@example.org
+npm-cli-login -r http://localhost:4873 -u lerna -p lerna -e lerna@example.org
 npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
 
 # If we run on Mac or WSL we use docker internal
