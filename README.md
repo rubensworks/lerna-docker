@@ -1,6 +1,6 @@
 # Lerna Docker
 
-A simple tool for easily building and publishing [Docker](https://www.docker.com/) images inside [Lerna](https://lernajs.io/) monorepos.
+A simple tool for easily building and publishing [Docker](https://www.docker.com/) images inside [Lerna](https://lerna.js.org/) monorepos.
 
 Features:
 * Building Docker images for all packages that have a Dockerfile.
@@ -11,7 +11,8 @@ Features:
 
 * [Bash](https://www.gnu.org/software/bash/) _(Installed by default on UNIX machines)_
 * [Docker](https://www.docker.com/)
-* [A Lerna project](https://lernajs.io/)
+* [A Lerna project](https://lerna.js.org/)
+* [npm](https://www.npmjs.com/)
 
 ## Install
 
@@ -34,7 +35,13 @@ First, clone this repo somewhere:
 $ git clone git@github.com:rubensworks/lerna-docker.git
 ```
 
-Then, add the `/bin` folder to your `$PATH`.
+Secondly, install the required npm packages:
+
+```
+npm install -g verdaccio@5.29.2 npm-cli-adduser npm-cli-login
+```
+
+Lastly, add the `/bin` folder to your `$PATH`.
 For example, by adding the following to your `~/.bash_profile`
 
 ```bash
