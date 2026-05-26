@@ -38,7 +38,7 @@ $ git clone git@github.com:rubensworks/lerna-docker.git
 Secondly, install the required npm packages:
 
 ```
-npm install -g verdaccio@5.29.2 npm-cli-adduser npm-cli-login
+npm install -g verdaccio@5.31.0 npm-cli-adduser npm-cli-login
 ```
 
 Lastly, add the `/bin` folder to your `$PATH`.
